@@ -13,7 +13,7 @@ def print_transcription(transcriptions, transcription, i, video_id, file_path):
         my_print(transcriptions[j]['text'], f)
     my_print("", f)
 
-    my_print(f"Time: {int(transcription['start']//60)}:{int(transcription['start']%60)}", f)
+    my_print(f"Time: {int(transcription['start']//60)}:{int(transcription['start']%60):02}", f)
     my_print(f"Duration: {int(transcription['duration'])} seconds", f)
     my_print(f"Link: https://www.youtube.com/watch?v={video_id}&t={int(transcription['start'])}", f)
     my_print("", f)
