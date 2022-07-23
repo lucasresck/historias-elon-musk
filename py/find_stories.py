@@ -30,7 +30,6 @@ def find_stories_on_video(video_id, data_path="../data/video_transcriptions"):
     Args:
         video_id (str): YouTube video id.
     """
-    # Create data_path if it doesn't exist
     data_path = Path(data_path)
     data_path.mkdir(parents=True, exist_ok=True)
 
