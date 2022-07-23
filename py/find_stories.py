@@ -22,7 +22,10 @@ def print_transcription(transcriptions, transcription, i, video_id, file_path):
 
 def check_historia(text):
     text = text.lower()
-    return "história" in text or "historia" in text
+    strings = ["história", "historia", "choradeira", "joelho"]
+    for string in strings:
+        if string in text:
+            return True
 
 def find_stories_on_video(video_id, data_path="../data/video_transcriptions"):
     """Find Elon Musk miraculous stories on a video.
