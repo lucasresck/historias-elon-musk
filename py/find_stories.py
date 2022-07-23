@@ -70,7 +70,10 @@ def find_stories_on_video(video_id, data_path="../data/video_transcriptions"):
         if check_historia(transcription['text']):
             print_transcription(transcriptions, transcription, i, video_id, file_path)
 
-def find_stories_on_channel(channel_url, data_path="../data/video_transcriptions"):
+def find_stories_on_channel(
+    channel_url="https://www.youtube.com/c/luideverso",
+    data_path="../data/video_transcriptions"
+):
     """Find Elon Musk miraculous stories on a channel.
 
     Args:
