@@ -1,5 +1,6 @@
 import scrapetube
 from pathlib import Path
+from tqdm.auto import tqdm
 from youtube_transcript_api import YouTubeTranscriptApi
 
 def my_print(text, file, end="\n"):
