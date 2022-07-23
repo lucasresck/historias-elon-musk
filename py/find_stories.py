@@ -1,3 +1,4 @@
+import scrapetube
 from pathlib import Path
 from youtube_transcript_api import YouTubeTranscriptApi
 
@@ -67,3 +68,15 @@ def find_stories_on_video(video_id, data_path="../data/video_transcriptions"):
     for i, transcription in enumerate(transcriptions):
         if check_historia(transcription['text']):
             print_transcription(transcriptions, transcription, i, video_id, file_path)
+
+def find_stories_on_channel(channel_url, data_path="../data/video_transcriptions"):
+    """Find Elon Musk miraculous stories on a channel.
+
+    Args:
+        channel_url (str): YouTube channel url.
+        data_path (str): Path to save the data.
+    """
+    videos = scrapetube.get_channel(channel_url=channel_url)
+    video_ids = [video['videoId'] for video in tqdm(videos, desc="Getting channel videos...")]
+    for video_id in tqdm(video_ids, desc="Finding stories..."):
+        find_stories_on_video(video_id, data_path)
