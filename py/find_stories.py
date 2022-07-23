@@ -4,7 +4,7 @@ def print_transcription(transcriptions, transcription, i, video_id):
     for j in range(max([i - 3, 0]), min([i + 3, len(transcriptions)])):
         if j == i:
             print(">> ", end="")
-        print(transcriptions[j]["text"])
+        print(transcriptions[j]['text'])
     print()
 
     print(f"Time: {int(transcription['start']//60)}:{int(transcription['start']%60)}")
@@ -21,5 +21,5 @@ def find_stories_on_video(video_id):
     """
     transcriptions = YouTubeTranscriptApi.get_transcript(video_id, languages=['pt'])
     for i, transcription in enumerate(transcriptions):
-        if "história" in transcription["text"].lower():
+        if "história" in transcription['text'].lower():
             print_transcription(transcriptions, transcription, i, video_id)
