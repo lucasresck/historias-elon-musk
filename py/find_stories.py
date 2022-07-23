@@ -5,8 +5,8 @@ def my_print(text, file, end="\n"):
     print(text, end=end)
     print(text, file=file, end=end)
 
-def print_transcription(transcriptions, transcription, i, video_id, data_path):
-    f = open(data_path / f"{video_id}.txt", 'a')
+def print_transcription(transcriptions, transcription, i, video_id, file_path):
+    f = open(file_path, 'a')
     for j in range(max([i - 3, 0]), min([i + 3, len(transcriptions)])):
         if j == i:
             my_print(">> ", f, end="")
@@ -32,6 +32,9 @@ def find_stories_on_video(video_id, data_path="../data/video_transcriptions"):
     """
     data_path = Path(data_path)
     data_path.mkdir(parents=True, exist_ok=True)
+    file_path = data_path / f"{video_id}.txt"
+    if file_path.exists():
+        file_path.unlink()
 
     transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
     transcript_list = [transcript for transcript in transcript_list if transcript.language_code == 'pt']
@@ -43,4 +46,4 @@ def find_stories_on_video(video_id, data_path="../data/video_transcriptions"):
     transcriptions = transcript_list[0].fetch()
     for i, transcription in enumerate(transcriptions):
         if check_historia(transcription['text']):
-            print_transcription(transcriptions, transcription, i, video_id, data_path)
+            print_transcription(transcriptions, transcription, i, video_id, file_path)
