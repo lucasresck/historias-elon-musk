@@ -13,7 +13,7 @@ def print_transcription(transcriptions, transcription, i, video_id, file_path):
         my_print(transcriptions[j]['text'], f)
     my_print("", f)
 
-    my_print(f"Time: {int(transcription['start']//60)}:{int(transcription['start']%60):02}", f)
+    my_print(f"Time: {int(transcription['start']//60):02}:{int(transcription['start']%60):02}", f)
     my_print(f"Duration: {int(transcription['duration'])} seconds", f)
     my_print(f"Link: https://www.youtube.com/watch?v={video_id}&t={int(transcription['start'])}", f)
     my_print("", f)
@@ -21,17 +21,34 @@ def print_transcription(transcriptions, transcription, i, video_id, file_path):
     f.close()
 
 def check_historia(text):
+    """Check if a text is a story.
+
+    Search for keywords in the text in order to determine if it is a story.
+
+    Args:
+        text (str): Text to check.
+
+    Returns:
+        bool: True if it is a story, False otherwise.
+    """
     text = text.lower()
+
+    # It is not possible to simply search for "Elon Musk", "Elon", and "Musk"
+    # in a text because automatically generated Portuguese transcriptions
+    # usually don't recognize these words.
     strings = ["história", "historia", "choradeira", "joelho", "teve uma vez"]
+
     for string in strings:
         if string in text:
             return True
+    return False
 
 def find_stories_on_video(video_id, data_path="../data/video_transcriptions"):
     """Find Elon Musk miraculous stories on a video.
 
     Args:
         video_id (str): YouTube video id.
+        data_path (str): Path to save the data.
     """
     data_path = Path(data_path)
     data_path.mkdir(parents=True, exist_ok=True)
