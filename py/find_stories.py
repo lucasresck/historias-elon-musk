@@ -1,5 +1,6 @@
 import scrapetube
 from pathlib import Path
+from pytube import YouTube
 from tqdm.auto import tqdm
 from youtube_transcript_api import YouTubeTranscriptApi
 
@@ -54,7 +55,10 @@ def find_stories_on_video(video_id, data_path="../data/video_transcriptions"):
     """
     data_path = Path(data_path)
     data_path.mkdir(parents=True, exist_ok=True)
-    file_path = data_path / f"{video_id}.txt"
+    yt = YouTube(f"https://www.youtube.com/watch?v={video_id}")
+    video_date = yt.publish_date.strftime('%Y-%m-%d')
+    video_title = yt.title
+    file_path = data_path / f"{video_date} - {video_title} - {video_id}.txt"
     if file_path.exists():
         file_path.unlink()
 
