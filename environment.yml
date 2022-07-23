@@ -14,8 +14,8 @@ dependencies:
   - bleach=4.1.0=pyhd3eb1b0_0
   - brotlipy=0.7.0=py310h5764c6d_1004
   - bzip2=1.0.8=h7b6447c_0
-  - ca-certificates=2022.07.19=h06a4308_0
-  - certifi=2022.6.15=py310h06a4308_0
+  - ca-certificates=2022.6.15=ha878542_0
+  - certifi=2022.6.15=py310hff52083_0
   - cffi=1.15.0=py310hd667e15_1
   - charset-normalizer=2.1.0=pyhd8ed1ab_0
   - cryptography=35.0.0=py310h685ca39_2
@@ -90,6 +90,7 @@ dependencies:
   - python-dateutil=2.8.2=pyhd3eb1b0_0
   - python-fastjsonschema=2.15.1=pyhd3eb1b0_0
   - python_abi=3.10=2_cp310
+  - pytube=12.1.0=pyhd8ed1ab_0
   - pyzmq=23.2.0=py310h6a678d5_0
   - qt=5.9.7=h5867ecd_1
   - qtconsole=5.3.1=py310h06a4308_0
