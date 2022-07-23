@@ -5,8 +5,8 @@ def my_print(text, file, end="\n"):
     print(text, end=end)
     print(text, file=file, end=end)
 
-def print_transcription(transcriptions, transcription, i, video_id):
-    f = open(f"{video_id}.txt", 'a')
+def print_transcription(transcriptions, transcription, i, video_id, data_path):
+    f = open(data_path / f"{video_id}.txt", 'a')
     for j in range(max([i - 3, 0]), min([i + 3, len(transcriptions)])):
         if j == i:
             my_print(">> ", f, end="")
@@ -44,4 +44,4 @@ def find_stories_on_video(video_id, data_path="../data/video_transcriptions"):
     transcriptions = transcript_list[0].fetch()
     for i, transcription in enumerate(transcriptions):
         if check_historia(transcription['text']):
-            print_transcription(transcriptions, transcription, i, video_id)
+            print_transcription(transcriptions, transcription, i, video_id, data_path)
