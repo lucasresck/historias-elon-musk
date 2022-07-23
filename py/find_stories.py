@@ -22,7 +22,7 @@ def print_transcription(transcriptions, transcription, i, video_id, file_path):
 
 def check_historia(text):
     text = text.lower()
-    strings = ["história", "historia", "choradeira", "joelho"]
+    strings = ["história", "historia", "choradeira", "joelho", "teve uma vez"]
     for string in strings:
         if string in text:
             return True
