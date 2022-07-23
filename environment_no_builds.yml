@@ -67,4 +67,7 @@ dependencies:
   - youtube-transcript-api=0.4.4
   - zeromq=4.3.4
   - zlib=1.2.12
+  - pip:
+    - scrapetube==2.2.2
+    - typing-extensions==4.3.0
 prefix: /home/lucasresck/anaconda3/envs/historias-elon-musk
