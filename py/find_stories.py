@@ -1,4 +1,5 @@
 import scrapetube
+import time
 from pathlib import Path
 from pytube import YouTube
 from tqdm.auto import tqdm
@@ -53,15 +54,6 @@ def find_stories_on_video(video_id, data_path="../data/video_transcriptions"):
         video_id (str): YouTube video id.
         data_path (str): Path to save the data.
     """
-    data_path = Path(data_path)
-    data_path.mkdir(parents=True, exist_ok=True)
-    yt = YouTube(f"https://www.youtube.com/watch?v={video_id}")
-    video_date = yt.publish_date.strftime('%Y-%m-%d')
-    video_title = yt.title
-    file_path = data_path / f"{video_date} - {video_title} - {video_id}.txt"
-    if file_path.exists():
-        file_path.unlink()
-
     transcript_list = YouTubeTranscriptApi.list_transcripts(video_id)
     transcript_list = [transcript for transcript in transcript_list if transcript.language_code == 'pt']
     if len(transcript_list) == 0:
@@ -70,6 +62,21 @@ def find_stories_on_video(video_id, data_path="../data/video_transcriptions"):
     assert len(transcript_list) == 1, "More than one transcript found for video"
 
     transcriptions = transcript_list[0].fetch()
+    transcription_text = " ".join([transcription['text'] for transcription in transcriptions])
+    if not check_historia(transcription_text):
+        return
+
+    yt = YouTube(f"https://www.youtube.com/watch?v={video_id}")
+    time.sleep(1)
+    video_date = yt.publish_date.strftime('%Y-%m-%d')
+    video_title = yt.title
+            
+    data_path = Path(data_path)
+    data_path.mkdir(parents=True, exist_ok=True)
+    file_path = data_path / f"{video_date} - {video_title} - {video_id}.txt"
+    if file_path.exists():
+        file_path.unlink()
+
     for i, transcription in enumerate(transcriptions):
         if check_historia(transcription['text']):
             print_transcription(transcriptions, transcription, i, video_id, file_path)
